@@ -1,4 +1,5 @@
 # android_media_practice
 
-## opengl
+## opengl with glsurfaceview
 * cylinder
+* circular ring

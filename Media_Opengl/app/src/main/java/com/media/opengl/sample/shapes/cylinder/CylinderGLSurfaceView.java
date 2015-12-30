@@ -16,7 +16,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-public class MyGLSurfaceView extends GLSurfaceView {
+public class CylinderGLSurfaceView extends GLSurfaceView {
 
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;//角度缩放比例
     private SceneRenderer mRenderer;//场景渲染器
@@ -24,7 +24,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
     private float mPreviousX;//上次的触控位置Y坐标
     private int lightAngle = 90;//灯的当前角度
 
-    public MyGLSurfaceView(Context context) {
+    public CylinderGLSurfaceView(Context context) {
         super(context);
         mRenderer = new SceneRenderer();    //创建场景渲染器
         setRenderer(mRenderer);                //设置渲染器

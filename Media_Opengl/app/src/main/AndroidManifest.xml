@@ -27,7 +27,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.media.opengl.sample.ItemListActivity" />
         </activity>
-        <activity android:name=".shapes.cylinder.GL_Cylinder" />
+        <activity android:name=".shapes.cylinder.GLCylinderActivity" />
+        <activity android:name=".shapes.ring.GLCirqueActivity" />
     </application>
 
 </manifest>

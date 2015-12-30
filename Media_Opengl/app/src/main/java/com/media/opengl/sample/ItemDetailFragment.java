@@ -1,6 +1,7 @@
 package com.media.opengl.sample;
 
 import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.media.opengl.sample.model.DummyContent;
-import com.media.opengl.sample.shapes.cylinder.MyGLSurfaceView;
+import com.media.opengl.sample.model.ShapeContent;
+import com.media.opengl.sample.shapes.cylinder.CylinderGLSurfaceView;
+import com.media.opengl.sample.shapes.ring.RingGLSurfaceView;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -27,9 +29,9 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private ShapeContent.ShapeItem mItem;
 
-    MyGLSurfaceView mGLSurfaceView;
+    GLSurfaceView mGLSurfaceView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -46,7 +48,7 @@ public class ItemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = ShapeContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -61,7 +63,12 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (mItem != null) {
             if ("1".equals(mItem.id.toLowerCase())) {
-                mGLSurfaceView = new MyGLSurfaceView(getContext());
+                mGLSurfaceView = new CylinderGLSurfaceView(getContext());
+                mGLSurfaceView.setFocusableInTouchMode(true);//设置为可触控
+                mGLSurfaceView.requestFocus();//获取焦点
+                return mGLSurfaceView;
+            } else if ("2".equals(mItem.id.toLowerCase())) {
+                mGLSurfaceView = new RingGLSurfaceView(getContext());
                 mGLSurfaceView.setFocusableInTouchMode(true);//设置为可触控
                 mGLSurfaceView.requestFocus();//获取焦点
                 return mGLSurfaceView;

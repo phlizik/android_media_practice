@@ -9,36 +9,33 @@ import java.util.Map;
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
  */
-public class DummyContent {
+public class ShapeContent {
 
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<ShapeItem> ITEMS = new ArrayList<ShapeItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, ShapeItem> ITEM_MAP = new HashMap<String, ShapeItem>();
 
     static {
-        // Add some sample items.
-        addItem(new DummyItem("1", "Cylinder"));
+        addItem(new ShapeItem("1", "Cylinder"));
+        addItem(new ShapeItem("2", "CircularRing"));
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(ShapeItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    /**
-     * A dummy item representing a piece of content.
-     */
-    public static class DummyItem {
+    public static class ShapeItem {
         public final String id;
         public final String content;
 
-        public DummyItem(String id, String content) {
+        public ShapeItem(String id, String content) {
             this.id = id;
             this.content = content;
         }

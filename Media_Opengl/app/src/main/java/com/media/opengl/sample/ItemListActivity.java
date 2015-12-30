@@ -4,20 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import com.media.opengl.sample.model.DummyContent;
-import com.media.opengl.sample.shapes.cylinder.CylinderShape;
-import com.media.opengl.sample.shapes.cylinder.GL_Cylinder;
+import com.media.opengl.sample.model.ShapeContent;
+import com.media.opengl.sample.shapes.cylinder.GLCylinderActivity;
+import com.media.opengl.sample.shapes.ring.GLCirqueActivity;
 
 import java.util.List;
 
@@ -69,15 +68,15 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(ShapeContent.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<ShapeContent.ShapeItem> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<ShapeContent.ShapeItem> items) {
             mValues = items;
         }
 
@@ -107,7 +106,12 @@ public class ItemListActivity extends AppCompatActivity {
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, GL_Cylinder.class);
+                        Intent intent = new Intent();
+                        if ("1".equals(holder.mItem.id)) {
+                            intent.setClass(context, GLCylinderActivity.class);
+                        } else if ("2".equals(holder.mItem.id)) {
+                            intent.setClass(context, GLCirqueActivity.class);
+                        }
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
 
                         context.startActivity(intent);
@@ -125,7 +129,7 @@ public class ItemListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public ShapeContent.ShapeItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
