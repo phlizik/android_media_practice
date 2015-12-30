@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.media.opengl.sample.model.ShapeContent;
 import com.media.opengl.sample.shapes.cylinder.CylinderGLSurfaceView;
+import com.media.opengl.sample.shapes.paraboloid.ParaboloidGLSurfaceView;
 import com.media.opengl.sample.shapes.ring.RingGLSurfaceView;
 
 /**
@@ -69,6 +70,11 @@ public class ItemDetailFragment extends Fragment {
                 return mGLSurfaceView;
             } else if ("2".equals(mItem.id.toLowerCase())) {
                 mGLSurfaceView = new RingGLSurfaceView(getContext());
+                mGLSurfaceView.setFocusableInTouchMode(true);//设置为可触控
+                mGLSurfaceView.requestFocus();//获取焦点
+                return mGLSurfaceView;
+            } else if ("3".equals(mItem.id)) {
+                mGLSurfaceView = new ParaboloidGLSurfaceView(getContext());
                 mGLSurfaceView.setFocusableInTouchMode(true);//设置为可触控
                 mGLSurfaceView.requestFocus();//获取焦点
                 return mGLSurfaceView;

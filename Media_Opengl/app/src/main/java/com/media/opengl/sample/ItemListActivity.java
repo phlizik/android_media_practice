@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.media.opengl.sample.model.ShapeContent;
 import com.media.opengl.sample.shapes.cylinder.GLCylinderActivity;
+import com.media.opengl.sample.shapes.paraboloid.GLParaboloidActivity;
 import com.media.opengl.sample.shapes.ring.GLCirqueActivity;
 
 import java.util.List;
@@ -111,6 +112,8 @@ public class ItemListActivity extends AppCompatActivity {
                             intent.setClass(context, GLCylinderActivity.class);
                         } else if ("2".equals(holder.mItem.id)) {
                             intent.setClass(context, GLCirqueActivity.class);
+                        } else if ("3".equals(holder.mItem.id)) {
+                            intent.setClass(context, GLParaboloidActivity.class);
                         }
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
 

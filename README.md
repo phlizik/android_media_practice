@@ -3,3 +3,4 @@
 ## opengl with glsurfaceview
 * cylinder
 * circular ring
+* paraboloid

@@ -1,4 +1,4 @@
-package com.media.opengl.sample.shapes.cylinder;
+package com.media.opengl.sample.shapes.paraboloid;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +16,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-public class CylinderGLSurfaceView extends GLSurfaceView {
+public class ParaboloidGLSurfaceView extends GLSurfaceView {
 
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;//角度缩放比例
     private SceneRenderer mRenderer;//场景渲染器
@@ -24,7 +24,7 @@ public class CylinderGLSurfaceView extends GLSurfaceView {
     private float mPreviousX;//上次的触控位置Y坐标
     private int lightAngle = 90;//灯的当前角度
 
-    public CylinderGLSurfaceView(Context context) {
+    public ParaboloidGLSurfaceView(Context context) {
         super(context);
         mRenderer = new SceneRenderer();    //创建场景渲染器
         setRenderer(mRenderer);                //设置渲染器
@@ -51,7 +51,8 @@ public class CylinderGLSurfaceView extends GLSurfaceView {
 
     private class SceneRenderer implements GLSurfaceView.Renderer {
         int textureId;//纹理名称ID
-        CylinderShape cylinder;//创建圆柱体
+        //DrawCylinder cylinder;//创建圆柱体
+        Drawpao cylinder;
 
         public SceneRenderer() {
 
@@ -74,7 +75,7 @@ public class CylinderGLSurfaceView extends GLSurfaceView {
             gl.glLightfv(GL10.GL_LIGHT1, GL10.GL_POSITION, positionParamsRed, 0);
 
             initMaterial(gl);//初始化纹理
-            gl.glTranslatef(0, 0, -10f);//平移
+            gl.glTranslatef(0, -5, -10f);//平移
             initLight(gl);//开灯
             cylinder.drawSelf(gl);//绘制
             closeLight(gl);//关灯
@@ -107,9 +108,25 @@ public class CylinderGLSurfaceView extends GLSurfaceView {
             //启用深度测试
             gl.glEnable(GL10.GL_DEPTH_TEST);
 
-            textureId = initTexture(gl, R.drawable.stone_h);//纹理ID
-            cylinder = new CylinderShape(10f, 2f, 18f, textureId);//创建圆柱体
+            textureId = initTexture(gl, R.drawable.qinghua);//纹理ID
+            cylinder = new Drawpao(5f, 2f, 2f, 10, 20, textureId);//创建圆柱体
+            //cylinder=new DrawCylinder(5f,1f,18f,10,textureId);
 
+            //开启一个线程自动旋转光源
+            new Thread() {
+                public void run() {
+                    while (true) {
+                        lightAngle += 5;//转动灯
+                        mRenderer.cylinder.mAngleY += 2 * TOUCH_SCALE_FACTOR;//球沿Y轴转动
+                        requestRender();//重绘画面
+                        try {
+                            Thread.sleep(50);//休息10ms再重绘
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }.start();
         }
     }
 

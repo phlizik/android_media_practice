@@ -24,6 +24,7 @@ public class ShapeContent {
     static {
         addItem(new ShapeItem("1", "Cylinder"));
         addItem(new ShapeItem("2", "CircularRing"));
+        addItem(new ShapeItem("3", "Paraboloid"));
     }
 
     private static void addItem(ShapeItem item) {
